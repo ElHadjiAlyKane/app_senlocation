@@ -1,0 +1,38 @@
+{
+  "version": "1.0.0",
+  "name": "SenLocation Mobile",
+  "description": "Application mobile Qt/QML pour le système SenLocation",
+  "author": "SenLocation Team",
+  "license": "Proprietary",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ElHadjiAlyKane/app_senlocation"
+  },
+  "qt": {
+    "version": "5.15+",
+    "modules": [
+      "core",
+      "gui",
+      "quick",
+      "qml",
+      "network",
+      "quickcontrols2"
+    ]
+  },
+  "platforms": [
+    "Desktop (Windows, macOS, Linux)",
+    "Android",
+    "iOS"
+  ],
+  "features": [
+    "Authentification utilisateur",
+    "Gestion des propriétés",
+    "Contrats de location",
+    "Interface utilisateur moderne",
+    "Communication API REST"
+  ],
+  "api": {
+    "baseUrl": "https://api.senlocation.sn",
+    "version": "1.0"
+  }
+}
