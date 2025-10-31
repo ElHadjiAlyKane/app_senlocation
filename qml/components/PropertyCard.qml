@@ -103,12 +103,6 @@ Rectangle {
         }
     }
 
-    MouseArea {
-        anchors.fill: parent
-        cursorShape: Qt.PointingHandCursor
-        onClicked: propertyCard.clicked()
-    }
-
     // Hover effect
     Rectangle {
         anchors.fill: parent
@@ -126,7 +120,7 @@ Rectangle {
             id: mouseArea
             anchors.fill: parent
             hoverEnabled: true
-            propagateComposedEvents: true
+            cursorShape: Qt.PointingHandCursor
             onClicked: propertyCard.clicked()
         }
     }

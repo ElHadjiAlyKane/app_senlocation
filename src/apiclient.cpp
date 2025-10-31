@@ -83,7 +83,14 @@ void ApiClient::handleReply(QNetworkReply *reply, const std::function<void(QJson
         if (reply->error() == QNetworkReply::NoError) {
             QByteArray response = reply->readAll();
             QJsonDocument doc = QJsonDocument::fromJson(response);
-            callback(doc.object());
+            
+            // Validate JSON document
+            if (!doc.isNull() && doc.isObject()) {
+                callback(doc.object());
+            } else {
+                emit requestError("Invalid JSON response from server");
+                callback(QJsonObject());
+            }
         } else {
             emit requestError(reply->errorString());
             callback(QJsonObject());
