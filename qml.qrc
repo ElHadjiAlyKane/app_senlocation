@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/main.qml</file>
+        <file>qml/LoginPage.qml</file>
+        <file>qml/RegisterPage.qml</file>
+        <file>qml/HomePage.qml</file>
+        <file>qml/PropertyListPage.qml</file>
+        <file>qml/PropertyDetailPage.qml</file>
+        <file>qml/AddPropertyPage.qml</file>
+        <file>qml/RentalAgreementPage.qml</file>
+        <file>qml/ProfilePage.qml</file>
+        <file>qml/components/CustomButton.qml</file>
+        <file>qml/components/CustomTextField.qml</file>
+        <file>qml/components/PropertyCard.qml</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,56 @@
+# Qt project files
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qbs.user.*
+*.moc
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+*.autosave
+
+# Build directories
+build/
+build-*/
+debug/
+release/
+Debug/
+Release/
+
+# Qt compiled files
+*.o
+*.obj
+*.exe
+*.dll
+*.dylib
+*.so
+*.a
+*.lib
+
+# Generated files
+Makefile*
+*.qm
+*.prl
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Android
+android-build/
+*.apk
+*.aab
+
+# iOS
+*.ipa
+DerivedData/
+
+# Temporary files
+*.log
+*.tmp
+*.temp
