@@ -26,7 +26,13 @@ int main(int argc, char *argv[])
 
     // Load configuration from config.json
     QString apiBaseUrl = "http://localhost:8080"; // Default value
-    QFile configFile("config.json");
+    QString configPath = QCoreApplication::applicationDirPath() + "/config.json";
+    QFile configFile(configPath);
+    // Fallback to current directory if not found in application directory
+    if (!configFile.exists()) {
+        configFile.setFileName("config.json");
+    }
+    
     if (configFile.open(QIODevice::ReadOnly)) {
         QByteArray configData = configFile.readAll();
         QJsonDocument configDoc = QJsonDocument::fromJson(configData);

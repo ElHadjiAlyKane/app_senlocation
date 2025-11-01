@@ -43,8 +43,11 @@ void DisputeManager::createDispute(const QJsonObject &disputeData)
 {
     m_apiClient->post("/api/v1/disputes", disputeData, [this](QJsonObject response) {
         if (response.contains("success") && response["success"].toBool()) {
-            QJsonObject dispute = response.contains("dispute") ? response["dispute"].toObject() : response;
-            emit disputeCreated(dispute);
+            if (response.contains("dispute")) {
+                emit disputeCreated(response["dispute"].toObject());
+            } else {
+                emit disputeCreated(QJsonObject());
+            }
             fetchDisputes(); // Refresh the list
         } else {
             QString error = response["message"].toString("Échec de la création du litige");

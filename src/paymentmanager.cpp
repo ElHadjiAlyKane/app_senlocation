@@ -42,8 +42,11 @@ void PaymentManager::createPayment(const QJsonObject &paymentData)
 {
     m_apiClient->post("/api/v1/payments", paymentData, [this](QJsonObject response) {
         if (response.contains("success") && response["success"].toBool()) {
-            QJsonObject payment = response.contains("payment") ? response["payment"].toObject() : response;
-            emit paymentCreated(payment);
+            if (response.contains("payment")) {
+                emit paymentCreated(response["payment"].toObject());
+            } else {
+                emit paymentCreated(QJsonObject());
+            }
             fetchPayments(); // Refresh the list
         } else {
             QString error = response["message"].toString("Échec de la création du paiement");
