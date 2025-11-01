@@ -19,6 +19,9 @@ set(SOURCES
     src/authmanager.cpp
     src/propertymanager.cpp
     src/usermanager.cpp
+    src/contractmanager.cpp
+    src/paymentmanager.cpp
+    src/disputemanager.cpp
 )
 
 set(HEADERS
@@ -26,6 +29,9 @@ set(HEADERS
     src/authmanager.h
     src/propertymanager.h
     src/usermanager.h
+    src/contractmanager.h
+    src/paymentmanager.h
+    src/disputemanager.h
 )
 
 set(RESOURCES

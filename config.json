@@ -1,0 +1,12 @@
+{
+  "api": {
+    "baseUrl": "http://localhost:8080",
+    "version": "v1",
+    "timeout": 30000
+  },
+  "features": {
+    "phoneValidation": true,
+    "mediation": true,
+    "payments": true
+  }
+}

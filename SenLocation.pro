@@ -11,13 +11,19 @@ SOURCES += \
         src/apiclient.cpp \
         src/authmanager.cpp \
         src/propertymanager.cpp \
-        src/usermanager.cpp
+        src/usermanager.cpp \
+        src/contractmanager.cpp \
+        src/paymentmanager.cpp \
+        src/disputemanager.cpp
 
 HEADERS += \
         src/apiclient.h \
         src/authmanager.h \
         src/propertymanager.h \
-        src/usermanager.h
+        src/usermanager.h \
+        src/contractmanager.h \
+        src/paymentmanager.h \
+        src/disputemanager.h
 
 RESOURCES += qml.qrc
 
