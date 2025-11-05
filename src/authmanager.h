@@ -23,6 +23,7 @@ public:
     Q_INVOKABLE void login(const QString &email, const QString &password);
     Q_INVOKABLE void register_(const QString &name, const QString &email, const QString &password, const QString &role);
     Q_INVOKABLE void logout();
+    Q_INVOKABLE bool isDemoMode() const;
 
 signals:
     void authenticationChanged();
