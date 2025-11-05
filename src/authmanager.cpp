@@ -42,7 +42,7 @@ QString AuthManager::userName() const
 
 void AuthManager::login(const QString &email, const QString &password)
 {
-    // Check for demo credentials
+    // Check for demo credentials - Landlord
     if (email == "770000001" && password == "password") {
         // Demo mode authentication
         QString token = "DEMO_TOKEN_OFFLINE";
@@ -50,8 +50,32 @@ void AuthManager::login(const QString &email, const QString &password)
         m_apiClient->setAuthToken(token);
         m_isAuthenticated = true;
         m_userRole = "landlord";
-        m_userName = "Amadou Diop (Démo)";
+        m_userName = "Amadou Diop (Bailleur)";
         m_userId = "demo_user_001";
+
+        // Save authentication and demo flag
+        QSettings settings;
+        settings.setValue("auth/token", token);
+        settings.setValue("auth/role", m_userRole);
+        settings.setValue("auth/name", m_userName);
+        settings.setValue("auth/id", m_userId);
+        settings.setValue("demo_mode", true);
+
+        emit authenticationChanged();
+        emit loginSuccess();
+        return;
+    }
+    
+    // Check for demo credentials - Tenant
+    if (email == "770000002" && password == "password") {
+        // Demo mode authentication
+        QString token = "DEMO_TOKEN_OFFLINE_TENANT";
+        
+        m_apiClient->setAuthToken(token);
+        m_isAuthenticated = true;
+        m_userRole = "tenant";
+        m_userName = "Fatou Sall (Locataire)";
+        m_userId = "demo_user_tenant_001";
 
         // Save authentication and demo flag
         QSettings settings;
