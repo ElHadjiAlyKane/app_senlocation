@@ -139,12 +139,12 @@ Page {
                         MouseArea {
                             anchors.fill: parent
                             cursorShape: Qt.PointingHandCursor
+                            onPressed: parent.opacity = 0.7
+                            onReleased: parent.opacity = 1.0
                             onClicked: {
-                                parent.opacity = 0.7
                                 propertyManager.fetchProperties()
                                 stackView.push("PropertyListPage.qml")
                             }
-                            onReleased: parent.opacity = 1.0
                         }
                     }
 
@@ -180,11 +180,9 @@ Page {
                         MouseArea {
                             anchors.fill: parent
                             cursorShape: Qt.PointingHandCursor
-                            onClicked: {
-                                parent.opacity = 0.7
-                                stackView.push("AddPropertyPage.qml")
-                            }
+                            onPressed: parent.opacity = 0.7
                             onReleased: parent.opacity = 1.0
+                            onClicked: stackView.push("AddPropertyPage.qml")
                         }
                     }
 
@@ -232,11 +230,9 @@ Page {
                         MouseArea {
                             anchors.fill: parent
                             cursorShape: Qt.PointingHandCursor
-                            onClicked: {
-                                parent.opacity = 0.7
-                                stackView.push("RentalAgreementPage.qml")
-                            }
+                            onPressed: parent.opacity = 0.7
                             onReleased: parent.opacity = 1.0
+                            onClicked: stackView.push("RentalAgreementPage.qml")
                         }
                     }
 
@@ -271,11 +267,9 @@ Page {
                         MouseArea {
                             anchors.fill: parent
                             cursorShape: Qt.PointingHandCursor
-                            onClicked: {
-                                parent.opacity = 0.7
-                                stackView.push("ProfilePage.qml")
-                            }
+                            onPressed: parent.opacity = 0.7
                             onReleased: parent.opacity = 1.0
+                            onClicked: stackView.push("ProfilePage.qml")
                         }
                     }
                 }
