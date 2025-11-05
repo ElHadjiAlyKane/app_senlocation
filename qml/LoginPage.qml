@@ -5,6 +5,7 @@ import "components"
 
 Page {
     id: loginPage
+    objectName: "loginPage"
 
     background: Rectangle {
         gradient: Gradient {

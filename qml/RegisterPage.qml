@@ -5,6 +5,7 @@ import "components"
 
 Page {
     id: registerPage
+    objectName: "registerPage"
 
     background: Rectangle {
         gradient: Gradient {

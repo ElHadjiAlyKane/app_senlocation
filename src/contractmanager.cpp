@@ -19,53 +19,46 @@ void ContractManager::fetchContracts()
     bool isDemoMode = settings.value("demo_mode", false).toBool();
     
     if (isDemoMode) {
-        // Load demo contracts
+        // Load demo contracts based on user role
         m_contracts.clear();
+        QString userRole = settings.value("auth/role", "").toString();
         
-        // Contract 1: Actif sur Appartement Almadies avec Fatou Sall
-        QVariantMap contract1;
-        contract1["id"] = 1;
-        contract1["propertyId"] = 1;
-        contract1["tenantId"] = 101;
-        contract1["ownerId"] = 1;
-        contract1["startDate"] = "2024-01-01";
-        contract1["endDate"] = "2024-12-31";
-        contract1["monthlyRent"] = 450000.0;
-        contract1["deposit"] = 900000.0;
-        contract1["status"] = "Actif";
-        contract1["tenantName"] = "Fatou Sall";
-        contract1["propertyTitle"] = "Appartement 3 pièces Almadies";
-        m_contracts.append(contract1);
-        
-        // Contract 2: En cours sur Studio Plateau avec Moussa Kane
-        QVariantMap contract2;
-        contract2["id"] = 2;
-        contract2["propertyId"] = 3;
-        contract2["tenantId"] = 102;
-        contract2["ownerId"] = 1;
-        contract2["startDate"] = "2024-06-01";
-        contract2["endDate"] = "2025-05-31";
-        contract2["monthlyRent"] = 200000.0;
-        contract2["deposit"] = 400000.0;
-        contract2["status"] = "En cours";
-        contract2["tenantName"] = "Moussa Kane";
-        contract2["propertyTitle"] = "Studio Plateau";
-        m_contracts.append(contract2);
-        
-        // Contract 3: Terminé
-        QVariantMap contract3;
-        contract3["id"] = 3;
-        contract3["propertyId"] = 4;
-        contract3["tenantId"] = 103;
-        contract3["ownerId"] = 1;
-        contract3["startDate"] = "2023-01-01";
-        contract3["endDate"] = "2023-12-31";
-        contract3["monthlyRent"] = 550000.0;
-        contract3["deposit"] = 1100000.0;
-        contract3["status"] = "Terminé";
-        contract3["tenantName"] = "Awa Diallo";
-        contract3["propertyTitle"] = "Maison Sicap Liberté";
-        m_contracts.append(contract3);
+        if (userRole == "landlord") {
+            // Landlord sees contracts where they are the owner
+            
+            // Contract 1: Villa louée à Fatou Sall
+            QVariantMap contract1;
+            contract1["id"] = 1;
+            contract1["propertyId"] = 2;
+            contract1["tenantId"] = 101;
+            contract1["ownerId"] = 1;
+            contract1["startDate"] = "2024-01-01";
+            contract1["endDate"] = "2024-12-31";
+            contract1["monthlyRent"] = 800000.0;
+            contract1["deposit"] = 1600000.0;
+            contract1["status"] = "Actif";
+            contract1["tenantName"] = "Fatou Sall";
+            contract1["propertyTitle"] = "Villa moderne Mermoz";
+            m_contracts.append(contract1);
+            
+        } else if (userRole == "tenant") {
+            // Tenant sees contracts where they are the tenant
+            
+            // Contract 1: Fatou Sall loue un appartement à Sacré-Cœur
+            QVariantMap contract1;
+            contract1["id"] = 1;
+            contract1["propertyId"] = 1;
+            contract1["tenantId"] = 101;
+            contract1["ownerId"] = 10;
+            contract1["startDate"] = "2024-06-01";
+            contract1["endDate"] = "2025-05-31";
+            contract1["monthlyRent"] = 350000.0;
+            contract1["deposit"] = 700000.0;
+            contract1["status"] = "Actif";
+            contract1["landlordName"] = "Moussa Ndiaye";
+            contract1["propertyTitle"] = "Appartement 2 pièces Sacré-Cœur";
+            m_contracts.append(contract1);
+        }
         
         emit contractsChanged();
         return;
