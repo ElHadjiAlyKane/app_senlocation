@@ -57,8 +57,8 @@ Page {
                 CustomTextField {
                     id: emailField
                     Layout.fillWidth: true
-                    placeholderText: "Email"
-                    inputMethodHints: Qt.ImhEmailCharactersOnly
+                    placeholderText: "Email ou Téléphone"
+                    inputMethodHints: Qt.ImhNone
                 }
 
                 CustomTextField {

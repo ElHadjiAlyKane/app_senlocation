@@ -19,6 +19,12 @@ AuthManager::AuthManager(ApiClient *apiClient, QObject *parent)
     }
 }
 
+bool AuthManager::isDemoMode() const
+{
+    QSettings settings;
+    return settings.value("demo_mode", false).toBool();
+}
+
 bool AuthManager::isAuthenticated() const
 {
     return m_isAuthenticated;
@@ -36,6 +42,31 @@ QString AuthManager::userName() const
 
 void AuthManager::login(const QString &email, const QString &password)
 {
+    // Check for demo credentials
+    if (email == "770000001" && password == "password") {
+        // Demo mode authentication
+        QString token = "DEMO_TOKEN_OFFLINE";
+        
+        m_apiClient->setAuthToken(token);
+        m_isAuthenticated = true;
+        m_userRole = "landlord";
+        m_userName = "Amadou Diop (Démo)";
+        m_userId = "demo_user_001";
+
+        // Save authentication and demo flag
+        QSettings settings;
+        settings.setValue("auth/token", token);
+        settings.setValue("auth/role", m_userRole);
+        settings.setValue("auth/name", m_userName);
+        settings.setValue("auth/id", m_userId);
+        settings.setValue("demo_mode", true);
+
+        emit authenticationChanged();
+        emit loginSuccess();
+        return;
+    }
+    
+    // Normal API authentication for other credentials
     QJsonObject data;
     data["email"] = email;
     data["password"] = password;
@@ -51,12 +82,13 @@ void AuthManager::login(const QString &email, const QString &password)
             m_userName = user["name"].toString();
             m_userId = user["id"].toString();
 
-            // Save authentication
+            // Save authentication (not demo mode)
             QSettings settings;
             settings.setValue("auth/token", token);
             settings.setValue("auth/role", m_userRole);
             settings.setValue("auth/name", m_userName);
             settings.setValue("auth/id", m_userId);
+            settings.setValue("demo_mode", false);
 
             emit authenticationChanged();
             emit loginSuccess();
@@ -99,6 +131,7 @@ void AuthManager::logout()
     settings.remove("auth/role");
     settings.remove("auth/name");
     settings.remove("auth/id");
+    settings.remove("demo_mode");
 
     emit authenticationChanged();
 }
