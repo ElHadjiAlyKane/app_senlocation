@@ -6,6 +6,8 @@ import "components"
 Page {
     id: paymentsReceivedPage
 
+    property real totalReceived: 0
+
     header: ToolBar {
         background: Rectangle {
             color: "#4CAF50"
@@ -37,6 +39,14 @@ Page {
 
     Component.onCompleted: {
         paymentManager.fetchReceivedPayments()
+        calculateTotal()
+    }
+
+    Connections {
+        target: paymentManager
+        function onPaymentsChanged() {
+            calculateTotal()
+        }
     }
 
     Flickable {
@@ -67,7 +77,7 @@ Page {
                     }
 
                     Text {
-                        text: calculateTotal() + " FCFA"
+                        text: formatAmount(totalReceived) + " FCFA"
                         font.pixelSize: 28
                         font.bold: true
                         color: "white"
@@ -210,7 +220,7 @@ Page {
             var payment = paymentManager.payments[i]
             total += payment.totalReceived || 0
         }
-        return formatAmount(total)
+        totalReceived = total
     }
 
     function formatAmount(amount) {

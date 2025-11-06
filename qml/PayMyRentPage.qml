@@ -6,6 +6,9 @@ import "components"
 Page {
     id: payMyRentPage
 
+    property var currentRent: null
+    property var paymentHistory: []
+
     header: ToolBar {
         background: Rectangle {
             color: "#4CAF50"
@@ -37,6 +40,14 @@ Page {
 
     Component.onCompleted: {
         paymentManager.fetchTenantPayments()
+        updatePaymentData()
+    }
+
+    Connections {
+        target: paymentManager
+        function onPaymentsChanged() {
+            updatePaymentData()
+        }
     }
 
     Flickable {
@@ -85,7 +96,7 @@ Page {
                         color: "#E0E0E0"
                     }
 
-                    property var currentRent: getCurrentRent()
+                    property var currentRent: payMyRentPage.currentRent
 
                     Text {
                         text: currentRentColumn.currentRent ? currentRentColumn.currentRent.propertyName : ""
@@ -287,7 +298,7 @@ Page {
                         spacing: 10
                         interactive: false
 
-                        model: getPaymentHistory()
+                        model: payMyRentPage.paymentHistory
 
                         delegate: Rectangle {
                             width: historyList.width
@@ -402,7 +413,7 @@ Page {
                 Layout.fillWidth: true
             }
 
-            property var currentRent: getCurrentRent()
+            property var currentRent: payMyRentPage.currentRent
 
             Text {
                 text: "Montant: " + formatAmount(confirmationDialog.currentRent ? confirmationDialog.currentRent.total : 0) + " FCFA"
@@ -462,32 +473,33 @@ Page {
         }
     }
 
-    function showPaymentConfirmation(method) {
-        confirmationDialog.paymentMethod = method
-        confirmationDialog.open()
-    }
-
-    function getCurrentRent() {
-        // Get the first payment which is the current rent
+    function updatePaymentData() {
+        // Update current rent
         if (paymentManager.payments.length > 0) {
             var payment = paymentManager.payments[0]
             if (payment.status === "En attente") {
-                return payment
+                currentRent = payment
+            } else {
+                currentRent = null
             }
+        } else {
+            currentRent = null
         }
-        return null
-    }
-
-    function getPaymentHistory() {
-        // Get all payments except the first one (which is current rent)
+        
+        // Update payment history
         var history = []
         for (var i = 0; i < paymentManager.payments.length; i++) {
-            var payment = paymentManager.payments[i]
-            if (payment.status === "Payé") {
-                history.push(payment)
+            var p = paymentManager.payments[i]
+            if (p.status === "Payé") {
+                history.push(p)
             }
         }
-        return history
+        paymentHistory = history
+    }
+
+    function showPaymentConfirmation(method) {
+        confirmationDialog.paymentMethod = method
+        confirmationDialog.open()
     }
 
     function formatAmount(amount) {

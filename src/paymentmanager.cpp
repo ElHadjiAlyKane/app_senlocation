@@ -1,6 +1,10 @@
 #include "paymentmanager.h"
 #include <QSettings>
 
+// Role constants
+static const QString ROLE_LANDLORD = "landlord";
+static const QString ROLE_TENANT = "tenant";
+
 PaymentManager::PaymentManager(ApiClient *apiClient, QObject *parent)
     : QObject(parent)
     , m_apiClient(apiClient)
@@ -133,7 +137,7 @@ void PaymentManager::fetchReceivedPayments()
     bool isDemoMode = settings.value("demo_mode", false).toBool();
     QString userRole = settings.value("auth/role", "").toString();
     
-    if (isDemoMode && userRole == "landlord") {
+    if (isDemoMode && userRole == ROLE_LANDLORD) {
         // Load demo received payments for landlord
         m_payments.clear();
         
@@ -228,7 +232,7 @@ void PaymentManager::fetchTenantPayments()
     bool isDemoMode = settings.value("demo_mode", false).toBool();
     QString userRole = settings.value("auth/role", "").toString();
     
-    if (isDemoMode && userRole == "tenant") {
+    if (isDemoMode && userRole == ROLE_TENANT) {
         // Load demo tenant payment history
         m_payments.clear();
         

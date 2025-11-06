@@ -9,6 +9,14 @@ Rectangle {
 
     signal clicked()
 
+    // Property type colors
+    readonly property var typeColors: ({
+        "appartement": "#E3F2FD",
+        "villa": "#FFF3E0",
+        "studio": "#F3E5F5",
+        "maison": "#E8F5E9"
+    })
+
     height: 160
     radius: 10
     color: "white"
@@ -150,16 +158,7 @@ Rectangle {
 
     function getPropertyColor() {
         if (!modelData) return "#CCCCCC"
-        
-        // Different colors based on property type
-        var colors = {
-            "appartement": "#E3F2FD",
-            "villa": "#FFF3E0",
-            "studio": "#F3E5F5",
-            "maison": "#E8F5E9"
-        }
-        
-        return colors[modelData.type] || "#CCCCCC"
+        return typeColors[modelData.type] || "#CCCCCC"
     }
 
     function formatAmount(amount) {
