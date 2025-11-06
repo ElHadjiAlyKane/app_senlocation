@@ -273,6 +273,94 @@ Page {
                         }
                     }
                 }
+
+                // Row 3 - Payments
+                RowLayout {
+                    Layout.fillWidth: true
+                    spacing: 15
+
+                    // Card Paiements reçus (visible si landlord)
+                    Rectangle {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 130
+                        radius: 10
+                        color: "white"
+                        border.color: "#E0E0E0"
+                        border.width: 1
+                        visible: authManager.userRole === "landlord"
+
+                        ColumnLayout {
+                            anchors.centerIn: parent
+                            spacing: 10
+
+                            Text {
+                                text: "💰"
+                                font.pixelSize: 40
+                                Layout.alignment: Qt.AlignHCenter
+                            }
+
+                            Text {
+                                text: "Paiements reçus"
+                                font.pixelSize: 16
+                                font.bold: true
+                                color: "#333333"
+                                Layout.alignment: Qt.AlignHCenter
+                            }
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            onPressed: parent.opacity = 0.7
+                            onReleased: parent.opacity = 1.0
+                            onClicked: stackView.push("PaymentsReceivedPage.qml")
+                        }
+                    }
+
+                    // Card Payer ma location (visible si tenant)
+                    Rectangle {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 130
+                        radius: 10
+                        color: "white"
+                        border.color: "#E0E0E0"
+                        border.width: 1
+                        visible: authManager.userRole === "tenant"
+
+                        ColumnLayout {
+                            anchors.centerIn: parent
+                            spacing: 10
+
+                            Text {
+                                text: "💳"
+                                font.pixelSize: 40
+                                Layout.alignment: Qt.AlignHCenter
+                            }
+
+                            Text {
+                                text: "Payer ma location"
+                                font.pixelSize: 16
+                                font.bold: true
+                                color: "#333333"
+                                Layout.alignment: Qt.AlignHCenter
+                            }
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            onPressed: parent.opacity = 0.7
+                            onReleased: parent.opacity = 1.0
+                            onClicked: stackView.push("PayMyRentPage.qml")
+                        }
+                    }
+
+                    // Placeholder (fills second column in row)
+                    Item {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 130
+                    }
+                }
             }
 
             // Bottom spacing

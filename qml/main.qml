@@ -57,6 +57,16 @@ Window {
             ProfilePage {}
         }
 
+        Component {
+            id: paymentsReceivedPageComponent
+            PaymentsReceivedPage {}
+        }
+
+        Component {
+            id: payMyRentPageComponent
+            PayMyRentPage {}
+        }
+
         Keys.onBackPressed: {
             event.accepted = true
             handleBackButton()
