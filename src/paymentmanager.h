@@ -18,6 +18,8 @@ public:
     QVariantList payments() const;
 
     Q_INVOKABLE void fetchPayments();
+    Q_INVOKABLE void fetchReceivedPayments();
+    Q_INVOKABLE void fetchTenantPayments();
     Q_INVOKABLE void createPayment(const QJsonObject &paymentData);
     Q_INVOKABLE void getPaymentStatus(int paymentId);
 
