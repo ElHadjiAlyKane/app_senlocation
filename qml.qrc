@@ -32,5 +32,14 @@
         <file>qml/MediationSessionPage.qml</file>
         <file>qml/MediationReportPage.qml</file>
         <file>qml/MediatorProfilePage.qml</file>
+        <file>qml/LandlordDashboardPage.qml</file>
+        <file>qml/MyPropertiesPage.qml</file>
+        <file>qml/TenantDashboardPage.qml</file>
+        <file>qml/ContractValidationPage.qml</file>
+        <file>qml/MyContractPage.qml</file>
+        <file>qml/PaymentHistoryPage.qml</file>
+        <file>qml/DisputePage.qml</file>
+        <file>qml/NotificationsPage.qml</file>
+        <file>qml/DocumentsPage.qml</file>
     </qresource>
 </RCC>
