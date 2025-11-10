@@ -11,6 +11,7 @@
 #include "contractmanager.h"
 #include "paymentmanager.h"
 #include "disputemanager.h"
+#include "mediationmanager.h"
 
 int main(int argc, char *argv[])
 {
@@ -56,6 +57,7 @@ int main(int argc, char *argv[])
     ContractManager contractManager(&apiClient);
     PaymentManager paymentManager(&apiClient);
     DisputeManager disputeManager(&apiClient);
+    MediationManager mediationManager(&apiClient);
 
     // Setup QML engine
     QQmlApplicationEngine engine;
@@ -67,6 +69,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("contractManager", &contractManager);
     engine.rootContext()->setContextProperty("paymentManager", &paymentManager);
     engine.rootContext()->setContextProperty("disputeManager", &disputeManager);
+    engine.rootContext()->setContextProperty("mediationManager", &mediationManager);
 
     // Load main QML file
     const QUrl url(QStringLiteral("qrc:/qml/main.qml"));

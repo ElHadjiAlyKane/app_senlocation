@@ -22,6 +22,9 @@ public:
     Q_INVOKABLE void addProperty(const QJsonObject &propertyData);
     Q_INVOKABLE void updateProperty(const QString &propertyId, const QJsonObject &propertyData);
     Q_INVOKABLE void deleteProperty(const QString &propertyId);
+    Q_INVOKABLE void fetchEligibleForWithdrawal();
+    Q_INVOKABLE void withdrawProperty(const QString &propertyId, const QJsonObject &withdrawalData);
+    Q_INVOKABLE void getPropertyStatus(const QString &propertyId);
 
 signals:
     void propertiesChanged();
@@ -29,6 +32,9 @@ signals:
     void propertyAdded();
     void propertyUpdated();
     void propertyDeleted();
+    void eligiblePropertiesFetched(const QJsonArray &properties);
+    void propertyWithdrawn();
+    void propertyStatusFetched(const QJsonObject &status);
     void operationFailed(const QString &error);
 
 private:
