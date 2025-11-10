@@ -157,3 +157,83 @@ void ContractManager::getContractValidationStatus(int contractId)
         }
     });
 }
+
+void ContractManager::rejectContractTenant(int contractId, const QJsonObject &rejectionData)
+{
+    QString endpoint = QString("/api/v1/contracts/%1/reject-tenant").arg(contractId);
+    m_apiClient->post(endpoint, rejectionData, [this](QJsonObject response) {
+        if (response.contains("success") && response["success"].toBool()) {
+            emit contractRejected();
+            fetchContracts(); // Refresh the list
+        } else {
+            QString error = response["message"].toString("Échec du rejet du contrat");
+            emit operationFailed(error);
+        }
+    });
+}
+
+void ContractManager::fetchPendingValidationContracts()
+{
+    m_apiClient->get("/api/v1/contracts/pending-validation", [this](QJsonObject response) {
+        if (response.contains("contracts")) {
+            emit pendingContractsFetched(response["contracts"].toArray());
+        } else {
+            emit operationFailed("Échec du chargement des contrats en attente");
+        }
+    });
+}
+
+void ContractManager::confirmInitialPayments(int contractId, const QJsonObject &paymentData)
+{
+    QString endpoint = QString("/api/v1/contracts/%1/confirm-initial-payments").arg(contractId);
+    m_apiClient->post(endpoint, paymentData, [this](QJsonObject response) {
+        if (response.contains("success") && response["success"].toBool()) {
+            emit initialPaymentsConfirmed();
+            fetchContracts(); // Refresh the list
+        } else {
+            QString error = response["message"].toString("Échec de la confirmation des paiements initiaux");
+            emit operationFailed(error);
+        }
+    });
+}
+
+void ContractManager::confirmTenantDeparture(int contractId, const QJsonObject &departureData)
+{
+    QString endpoint = QString("/api/v1/contracts/%1/confirm-tenant-departure").arg(contractId);
+    m_apiClient->post(endpoint, departureData, [this](QJsonObject response) {
+        if (response.contains("success") && response["success"].toBool()) {
+            emit tenantDepartureConfirmed();
+            fetchContracts(); // Refresh the list
+        } else {
+            QString error = response["message"].toString("Échec de la confirmation du départ locataire");
+            emit operationFailed(error);
+        }
+    });
+}
+
+void ContractManager::confirmLandlordDeparture(int contractId, const QJsonObject &departureData)
+{
+    QString endpoint = QString("/api/v1/contracts/%1/confirm-landlord-departure").arg(contractId);
+    m_apiClient->post(endpoint, departureData, [this](QJsonObject response) {
+        if (response.contains("success") && response["success"].toBool()) {
+            emit landlordDepartureConfirmed();
+            fetchContracts(); // Refresh the list
+        } else {
+            QString error = response["message"].toString("Échec de la confirmation du départ bailleur");
+            emit operationFailed(error);
+        }
+    });
+}
+
+void ContractManager::getDepartureStatus(int contractId)
+{
+    QString endpoint = QString("/api/v1/contracts/%1/departure-status").arg(contractId);
+    m_apiClient->get(endpoint, [this](QJsonObject response) {
+        if (response.contains("status")) {
+            emit departureStatusFetched(response);
+        } else {
+            emit operationFailed("Échec de la récupération du statut de départ");
+        }
+    });
+}
+

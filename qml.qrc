@@ -11,8 +11,35 @@
         <file>qml/ProfilePage.qml</file>
         <file>qml/PaymentsReceivedPage.qml</file>
         <file>qml/PayMyRentPage.qml</file>
+        <file>qml/Style.qml</file>
         <file>qml/components/CustomButton.qml</file>
         <file>qml/components/CustomTextField.qml</file>
         <file>qml/components/PropertyCard.qml</file>
+        <file>qml/components/MediationCard.qml</file>
+        <file>qml/components/SessionTimeline.qml</file>
+        <file>qml/components/MediatorBadge.qml</file>
+        <file>qml/components/DisputeCard.qml</file>
+        <file>qml/components/ContractCard.qml</file>
+        <file>qml/components/PaymentCard.qml</file>
+        <file>qml/components/StatCard.qml</file>
+        <file>qml/components/ValidationCodeInput.qml</file>
+        <file>qml/components/DocumentUploader.qml</file>
+        <file>qml/components/ProgressStepper.qml</file>
+        <file>qml/MediatorDashboardPage.qml</file>
+        <file>qml/MediatorRegistrationPage.qml</file>
+        <file>qml/MediationListPage.qml</file>
+        <file>qml/MediationDetailPage.qml</file>
+        <file>qml/MediationSessionPage.qml</file>
+        <file>qml/MediationReportPage.qml</file>
+        <file>qml/MediatorProfilePage.qml</file>
+        <file>qml/LandlordDashboardPage.qml</file>
+        <file>qml/MyPropertiesPage.qml</file>
+        <file>qml/TenantDashboardPage.qml</file>
+        <file>qml/ContractValidationPage.qml</file>
+        <file>qml/MyContractPage.qml</file>
+        <file>qml/PaymentHistoryPage.qml</file>
+        <file>qml/DisputePage.qml</file>
+        <file>qml/NotificationsPage.qml</file>
+        <file>qml/DocumentsPage.qml</file>
     </qresource>
 </RCC>

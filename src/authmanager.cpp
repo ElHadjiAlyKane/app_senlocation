@@ -40,6 +40,11 @@ QString AuthManager::userName() const
     return m_userName;
 }
 
+bool AuthManager::isMediator() const
+{
+    return m_userRole == "mediator";
+}
+
 void AuthManager::login(const QString &email, const QString &password)
 {
     // Check for demo credentials - Landlord

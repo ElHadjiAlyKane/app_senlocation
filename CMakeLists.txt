@@ -22,6 +22,7 @@ set(SOURCES
     src/contractmanager.cpp
     src/paymentmanager.cpp
     src/disputemanager.cpp
+    src/mediationmanager.cpp
 )
 
 set(HEADERS
@@ -32,6 +33,7 @@ set(HEADERS
     src/contractmanager.h
     src/paymentmanager.h
     src/disputemanager.h
+    src/mediationmanager.h
 )
 
 set(RESOURCES

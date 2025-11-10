@@ -14,8 +14,24 @@ Window {
     StackView {
         id: stackView
         anchors.fill: parent
-        initialItem: authManager.isAuthenticated ? homePageComponent : loginPageComponent
+        initialItem: getInitialPage()
         focus: true
+
+        function getInitialPage() {
+            if (authManager.isAuthenticated) {
+                var userRole = authManager.userRole
+                if (userRole === "mediator") {
+                    return "MediatorDashboardPage.qml"
+                } else if (userRole === "landlord") {
+                    return "LandlordDashboardPage.qml"
+                } else if (userRole === "tenant") {
+                    return "TenantDashboardPage.qml"
+                } else {
+                    return homePageComponent
+                }
+            }
+            return loginPageComponent
+        }
 
         Component {
             id: loginPageComponent
@@ -77,7 +93,17 @@ Window {
         target: authManager
         function onAuthenticationChanged() {
             if (authManager.isAuthenticated) {
-                stackView.replace(homePageComponent)
+                // Role-based navigation
+                var userRole = authManager.userRole
+                if (userRole === "mediator") {
+                    stackView.replace("MediatorDashboardPage.qml")
+                } else if (userRole === "landlord") {
+                    stackView.replace("LandlordDashboardPage.qml")
+                } else if (userRole === "tenant") {
+                    stackView.replace("TenantDashboardPage.qml")
+                } else {
+                    stackView.replace(homePageComponent)
+                }
             } else {
                 stackView.replace(loginPageComponent)
             }

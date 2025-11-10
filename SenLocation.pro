@@ -14,7 +14,8 @@ SOURCES += \
         src/usermanager.cpp \
         src/contractmanager.cpp \
         src/paymentmanager.cpp \
-        src/disputemanager.cpp
+        src/disputemanager.cpp \
+        src/mediationmanager.cpp
 
 HEADERS += \
         src/apiclient.h \
@@ -23,7 +24,8 @@ HEADERS += \
         src/usermanager.h \
         src/contractmanager.h \
         src/paymentmanager.h \
-        src/disputemanager.h
+        src/disputemanager.h \
+        src/mediationmanager.h
 
 RESOURCES += qml.qrc
 

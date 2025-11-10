@@ -269,3 +269,40 @@ void PropertyManager::deleteProperty(const QString &propertyId)
         }
     });
 }
+
+void PropertyManager::fetchEligibleForWithdrawal()
+{
+    m_apiClient->get("/api/v1/properties/eligible-withdrawal", [this](QJsonObject response) {
+        if (response.contains("properties")) {
+            emit eligiblePropertiesFetched(response["properties"].toArray());
+        } else {
+            emit operationFailed("Échec du chargement des propriétés éligibles au retrait");
+        }
+    });
+}
+
+void PropertyManager::withdrawProperty(const QString &propertyId, const QJsonObject &withdrawalData)
+{
+    QString endpoint = QString("/api/v1/properties/%1/withdraw").arg(propertyId);
+    m_apiClient->post(endpoint, withdrawalData, [this](QJsonObject response) {
+        if (response.contains("success") && response["success"].toBool()) {
+            emit propertyWithdrawn();
+            fetchProperties(); // Refresh the list
+        } else {
+            QString error = response["message"].toString("Échec du retrait de la propriété");
+            emit operationFailed(error);
+        }
+    });
+}
+
+void PropertyManager::getPropertyStatus(const QString &propertyId)
+{
+    QString endpoint = QString("/api/v1/properties/%1/status").arg(propertyId);
+    m_apiClient->get(endpoint, [this](QJsonObject response) {
+        if (response.contains("status")) {
+            emit propertyStatusFetched(response);
+        } else {
+            emit operationFailed("Échec de la récupération du statut de la propriété");
+        }
+    });
+}
