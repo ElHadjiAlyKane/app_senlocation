@@ -25,5 +25,12 @@
         <file>qml/components/ValidationCodeInput.qml</file>
         <file>qml/components/DocumentUploader.qml</file>
         <file>qml/components/ProgressStepper.qml</file>
+        <file>qml/MediatorDashboardPage.qml</file>
+        <file>qml/MediatorRegistrationPage.qml</file>
+        <file>qml/MediationListPage.qml</file>
+        <file>qml/MediationDetailPage.qml</file>
+        <file>qml/MediationSessionPage.qml</file>
+        <file>qml/MediationReportPage.qml</file>
+        <file>qml/MediatorProfilePage.qml</file>
     </qresource>
 </RCC>
